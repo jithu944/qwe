@@ -34,40 +34,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 8px; /* Slightly tighter window padding */
   transition: all 0.2s;
-}
-
-/* Fullscreen handling */
-body:fullscreen,
-body:-webkit-full-screen {
-  padding: 16px;
-  background: #0a0a12;
 }
 
 #app {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px; /* Reduced layout width for a cleaner desktop look */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px; /* Snug spacing */
 }
 
-/* Header */
+/* Header - More Compact */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 10px;
+  padding: 8px 16px; /* Reduced height */
   background: var(--bg-panel);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 14px;
 }
 #title {
   font-family: 'Cinzel', serif;
-  font-size: 1.4rem;
+  font-size: 1.2rem; /* Scaled down */
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 1px;
@@ -76,7 +69,7 @@ body:-webkit-full-screen {
   color: #fff;
   opacity: .6;
   font-weight: 400;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   margin-left: 4px;
 }
 #hdr-btns {
@@ -87,18 +80,18 @@ body:-webkit-full-screen {
 /* UI Buttons */
 .btn {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 12px;
+  font-size: 11px; /* Scaled down slightly */
   font-weight: 600;
   text-transform: uppercase;
   background: rgba(20, 20, 40, 0.85);
   border: 1px solid var(--border);
   color: var(--text-dim);
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.2s ease;
   touch-action: manipulation;
-  min-height: 40px;
+  min-height: 34px; /* Shorter touch target optimized for laptops */
 }
 .btn:active { transform: scale(0.96); }
 .btn:hover {
@@ -113,57 +106,57 @@ body:-webkit-full-screen {
   font-weight: 700;
 }
 .btn.sm {
-  font-size: 11px;
-  padding: 4px 8px;
-  min-height: 32px;
+  font-size: 10px;
+  padding: 3px 6px;
+  min-height: 28px;
 }
 .btn.danger:active { border-color: #e74c3c; color: #e74c3c; }
 .btn-group {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 .btn-group .btn {
   flex: 1;
   text-align: center;
-  padding: 4px 6px;
-  font-size: 11px;
+  padding: 4px;
+  font-size: 10px;
 }
 
-/* Scores */
+/* Score Strip */
 #scores {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 .score-card {
   flex: 1;
   background: var(--bg-panel);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 6px;
   text-align: center;
 }
 .score-card .sc-label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-dim);
   text-transform: uppercase;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 .score-card .sc-val {
   font-family: 'Cinzel', serif;
-  font-size: 20px;
+  font-size: 18px;
   color: var(--gold);
   font-weight: 600;
 }
 
-/* Main Layout: Desktop split */
+/* Main Layout Split */
 #main {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: flex-start;
   width: 100%;
 }
 
-/* Board Responsiveness Architecture */
+/* Board Container - Compact Desktop sizing */
 #board-container {
   flex: 1;
   display: flex;
@@ -171,11 +164,11 @@ body:-webkit-full-screen {
   align-items: center;
   background: var(--bg-panel);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   width: 100%;
-  max-width: 650px; /* Limits size on ultra-wide screens */
+  max-width: 480px; /* Reduced from 650px to make it perfectly scaled on laptops */
   margin: 0 auto;
 }
 #board-outer {
@@ -187,7 +180,7 @@ body:-webkit-full-screen {
 #board-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1; /* Keeps the game grid perfectly square */
+  aspect-ratio: 1 / 1;
 }
 #board {
   display: grid;
@@ -195,31 +188,31 @@ body:-webkit-full-screen {
   grid-template-rows: repeat(8, 1fr);
   width: 100%;
   height: 100%;
-  border: 3px solid var(--gold-dim);
-  border-radius: 8px;
+  border: 2px solid var(--gold-dim);
+  border-radius: 6px;
   overflow: hidden;
   background: #1f2a15;
 }
 
-/* Dynamic Coordinate Labels mapping the grid spacing */
+/* Dynamic Grid Tracking Labels */
 #coord-row-top, #coord-row-bot {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   width: 100%;
-  padding: 0 4%; /* Matches side column alignment offset */
-  margin: 4px 0;
+  padding: 0 4%;
+  margin: 2px 0;
 }
 .coord-col {
   display: grid;
   grid-template-rows: repeat(8, 1fr);
   height: 100%;
   width: 4%;
-  min-width: 14px;
+  min-width: 12px;
   text-align: center;
 }
 .coord-label {
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--gold-dim);
   font-family: 'Cinzel', serif;
@@ -228,12 +221,12 @@ body:-webkit-full-screen {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--gold-dim);
 }
 
-/* Game Pieces & Interactions */
+/* Cells & Pieces */
 .cell {
   width: 100%;
   height: 100%;
@@ -254,15 +247,14 @@ body:-webkit-full-screen {
 }
 .cell.move-dot::after {
   content: '';
-  width: 25%;
-  height: 25%;
+  width: 24%;
+  height: 24%;
   border-radius: 50%;
   background: rgba(46, 204, 113, 0.9);
-  box-shadow: 0 0 6px rgba(0,0,0,0.4);
 }
 .cell.cap-dot {
   background: rgba(231, 76, 60, 0.55) !important;
-  outline: 2px solid #e74c3c;
+  outline: 1px solid #e74c3c;
 }
 .cell.last-from { background: rgba(201, 162, 39, 0.35) !important; }
 .cell.last-to { background: rgba(201, 162, 39, 0.5) !important; }
@@ -280,27 +272,90 @@ body:-webkit-full-screen {
 }
 .piece.red {
   background: radial-gradient(circle at 38% 32%, #f05545, #c0392b 70%, #7a1f16);
-  border: 1px solid rgba(255, 120, 100, 0.6);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 120, 100, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 .piece.blk {
   background: radial-gradient(circle at 38% 32%, #5a5a7a, #2c2c3e 70%, #111118);
-  border: 1px solid rgba(130, 130, 180, 0.5);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(130, 130, 180, 0.4);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
 .piece.king::after {
   content: '♛';
-  font-size: clamp(14px, 4.5vw, 24px);
+  font-size: clamp(12px, 4vw, 20px);
   color: #ffd966;
-  text-shadow: 0 0 6px rgba(255, 215, 0, 0.9);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.9);
   position: absolute;
 }
 .piece.lifted {
-  transform: scale(1.1);
-  box-shadow: 0 0 0 2px var(--gold), 0 6px 14px rgba(0, 0, 0, 0.6) !important;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 2px var(--gold), 0 4px 10px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Modals & Overlays */
+/* Sidebar Info Blocks */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px; /* Slimmer side column */
+  flex-shrink: 0;
+}
+.panel {
+  background: rgba(19, 19, 37, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px;
+}
+.panel h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+}
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  margin-bottom: 2px;
+}
+.player-row.active {
+  background: rgba(201, 162, 39, 0.1);
+  border-color: rgba(201, 162, 39, 0.3);
+}
+.pdot { width: 14px; height: 14px; border-radius: 50%; }
+.pdot.red { background: #c0392b; }
+.pdot.blk { background: #2c2c3e; border: 1px solid #5a5a7a; }
+.pname { font-size: 13px; font-weight: 500; flex: 1; }
+.pcnt {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(201, 162, 39, 0.12);
+  border-radius: 20px;
+  padding: 1px 6px;
+}
+.timer {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+.timer.on { color: var(--gold); }
+#history {
+  max-height: 80px; /* Kept concise to save screen real estate */
+  overflow-y: auto;
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+#history div { padding: 1px 2px; }
+#status-msg { font-size: 12px; color: #ddd; }
+
+/* Modals */
 #overlay {
   position: absolute;
   inset: 0;
@@ -308,118 +363,49 @@ body:-webkit-full-screen {
   display: none;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 6px;
   z-index: 30;
-  backdrop-filter: blur(4px);
 }
 #overlay-box {
   background: var(--bg-card);
   border: 1px solid var(--gold);
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 20px;
+  padding: 20px;
   text-align: center;
-  max-width: 260px;
+  max-width: 240px;
   width: 85%;
 }
-#overlay-box h2 { font-family: 'Cinzel', serif; font-size: 22px; color: var(--gold); margin-bottom: 8px; }
-#overlay-box p { font-size: 14px; color: #ccc; margin-bottom: 20px; }
 
-/* Sidebar Panels */
-#sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 280px;
-  flex-shrink: 0;
-}
-.panel {
-  background: rgba(19, 19, 37, 0.85);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 14px;
-}
-.panel h3 {
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  color: var(--gold-dim);
-  margin-bottom: 8px;
-}
-.player-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 10px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  margin-bottom: 4px;
-}
-.player-row.active {
-  background: rgba(201, 162, 39, 0.12);
-  border-color: rgba(201, 162, 39, 0.4);
-}
-.pdot { width: 16px; height: 16px; border-radius: 50%; }
-.pdot.red { background: #c0392b; }
-.pdot.blk { background: #2c2c3e; border: 1px solid #5a5a7a; }
-.pname { font-size: 14px; font-weight: 500; flex: 1; }
-.pcnt {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--gold);
-  background: rgba(201, 162, 39, 0.15);
-  border-radius: 20px;
-  padding: 2px 8px;
-}
-.timer {
-  font-family: monospace;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-dim);
-}
-.timer.on { color: var(--gold); }
-.timer.low { color: #e74c3c !important; }
-#history {
-  max-height: 100px;
-  overflow-y: auto;
-  font-size: 12px;
-  color: var(--text-dim);
-  line-height: 1.6;
-}
-#history div { padding: 2px 4px; }
-#status-msg { font-size: 13px; color: #ddd; }
-#status-msg.thinking { color: var(--gold-dim); font-style: italic; }
+/* ==================== ADAPTIVE RESPONSIVENESS ==================== */
 
-/* ==================== SCREEN BREAKPOINTS ==================== */
-
-/* Tablets and small laptops (e.g. iPad, smaller notebooks) */
-@media (max-width: 960px) {
-  #app { max-width: 700px; }
+/* Tablet & Smaller Desktop Displays */
+@media (max-width: 768px) {
+  #app { max-width: 520px; }
   #main { flex-direction: column; align-items: center; }
-  #sidebar { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  #sidebar { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .panel { height: 100%; }
 }
 
-/* Mobile Phones (Horizontal & Vertical adjustments) */
-@media (max-width: 600px) {
-  body { padding: 8px; }
-  #header { padding: 10px 14px; border-radius: 14px; }
-  #title { font-size: 1.1rem; }
+/* Smartphone Layouts */
+@media (max-width: 500px) {
+  body { padding: 4px; }
+  #header { padding: 8px 12px; }
+  #title { font-size: 1rem; }
   #title span { display: none; }
-  .btn { font-size: 11px; padding: 6px 10px; min-height: 36px; }
+  .btn { font-size: 10px; padding: 4px 8px; min-height: 32px; }
   
-  #board-container { padding: 8px; border-radius: 14px; }
-  .coord-label, .coord-col span { font-size: 10px; }
+  #board-container { padding: 6px; border-radius: 12px; }
+  .coord-label, .coord-col span { font-size: 9px; }
   
-  #sidebar { grid-template-columns: 1fr; gap: 10px; }
-  .score-card { padding: 6px; }
-  .score-card .sc-val { font-size: 16px; }
+  #sidebar { grid-template-columns: 1fr; gap: 8px; }
+  .score-card { padding: 4px; }
+  .score-card .sc-val { font-size: 15px; }
 }
 
-/* Ultra small devices */
-@media (max-width: 360px) {
+@media (max-width: 350px) {
   #hdr-btns { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }
-  #hdr-btns .btn { font-size: 9px; padding: 4px; min-height: 32px; }
-  #header { flex-direction: column; text-align: center; }
+  #hdr-btns .btn { font-size: 9px; padding: 2px; min-height: 28px; }
+  #header { flex-direction: column; }
 }
 </style>
 </head>
@@ -502,7 +488,7 @@ body:-webkit-full-screen {
       </div>
       <div class="panel">
         <h3>Status & History</h3>
-        <div id="status-msg" style="margin-bottom: 6px;">Your turn (Red)</div>
+        <div id="status-msg" style="margin-bottom: 4px;">Your turn (Red)</div>
         <div id="history"></div>
       </div>
     </div>
@@ -510,8 +496,6 @@ body:-webkit-full-screen {
 </div>
 
 <script>
-// Keep your existing JS exactly as it was. No changes are required here 
-// because the responsive CSS values take absolute control over sizes.
 var E=0, R=1, B=2, RK=3, BK=4;
 var board, sel, selMoves, turn, gOver, gMode, diff;
 var chainPiece, lastMove, hist, histIdx, moveLog, tRed, tBlk, tInt, scores, aiLock, kpopSet;
@@ -591,7 +575,7 @@ function count(b){ let r=0,bk=0; for(let i=0;i<8;i++) for(let j=0;j<8;j++){ if(i
 function evaluate(b){ let s=0; for(let r=0;r<8;r++)for(let c=0;c<8;c++){ let p=b[r][c]; if(p===E)continue; let center=Math.min(r,7-r,c,7-c); if(p===R)s-=(1+(7-r)*0.07+center*0.05); else if(p===B)s+=(1+r*0.07+center*0.05); else if(p===RK)s-=1.7; else if(p===BK)s+=1.7; } return s; }
 function minimax(b,depth,a,beta,maxi,t){
   let moves=legalMoves(b,t); if(depth===0||!moves.length) return evaluate(b);
-  if(maxi){ let best=-Infinity; for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,true,t):minimax(nb,depth-1,a,beta,false,opp(t)); best=Math.max(best,val); a=Math.max(a,val); if(beta<=a) break; } return best; }
+  if(maxi){ let best=-Infinity; for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv&&capsFor(nb,mv.tr,mv.tc).length))?minimax(nb,depth,a,beta,true,t):minimax(nb,depth-1,a,beta,false,opp(t)); best=Math.max(best,val); a=Math.max(a,val); if(beta<=a) break; } return best; }
   else{ let best=Infinity; for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,false,t):minimax(nb,depth-1,a,beta,true,opp(t)); best=Math.min(best,val); beta=Math.min(beta,val); if(beta<=a) break; } return best; }
 }
 function bestMove(b,t){
