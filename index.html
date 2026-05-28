@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Royal Checkers · Ultimate Fullscreen</title>
+<title>Royal Checkers · Perfect Mobile Fullscreen</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@400;500;600&display=swap');
 
@@ -26,6 +26,12 @@
   padding: 0;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
 body {
   font-family: 'Rajdhani', sans-serif;
   background: var(--bg-deep);
@@ -34,41 +40,46 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 12px;
   transition: all 0.2s;
+  overflow-x: hidden;
 }
 
-/* fullscreen mode - works on all devices */
+/* Fullscreen - works on all mobile browsers */
 body:fullscreen,
-body:-webkit-full-screen {
-  padding: 20px;
+body:-webkit-full-screen,
+body:fullscreen #app,
+body:-webkit-full-screen #app {
+  padding: 16px;
   background: #0a0a12;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 body:fullscreen #board,
 body:-webkit-full-screen #board {
-  grid-template-columns: repeat(8, minmax(60px, 11vmin));
-  grid-template-rows: repeat(8, minmax(60px, 11vmin));
+  grid-template-columns: repeat(8, minmax(52px, 10vmin));
+  grid-template-rows: repeat(8, minmax(52px, 10vmin));
 }
 body:fullscreen .piece.king::after,
 body:-webkit-full-screen .piece.king::after {
-  font-size: clamp(18px, 5vmin, 34px);
+  font-size: clamp(16px, 4.5vmin, 30px);
 }
 body:fullscreen .btn,
 body:-webkit-full-screen .btn {
   font-size: 14px;
-  padding: 8px 18px;
-}
-body:fullscreen #title {
-  font-size: 1.8rem;
+  padding: 8px 16px;
+  min-height: 44px;
 }
 
 #app {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -77,8 +88,8 @@ body:fullscreen #title {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 10px;
+  padding: 10px 16px;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -86,48 +97,46 @@ body:fullscreen #title {
 }
 #title {
   font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 2px;
+  white-space: nowrap;
 }
 #title span {
   color: #fff;
   opacity: .6;
   font-weight: 400;
-  font-size: 0.85rem;
-  margin-left: 6px;
+  font-size: 0.8rem;
+  margin-left: 4px;
 }
 #hdr-btns {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
-/* Buttons - larger touch target */
+/* Buttons - large touch targets */
 .btn {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  background: rgba(20, 20, 40, 0.85);
+  background: rgba(20, 20, 40, 0.9);
   border: 1px solid var(--border);
   color: var(--text-dim);
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(2px);
   touch-action: manipulation;
-  min-height: 40px;
+  min-height: 38px;
+  min-width: 44px;
 }
 .btn:active {
   transform: scale(0.96);
-}
-.btn:hover {
-  border-color: var(--gold);
-  color: var(--gold);
   background: rgba(201, 162, 39, 0.2);
 }
 .btn.active {
@@ -135,11 +144,10 @@ body:fullscreen #title {
   border-color: var(--gold);
   color: #111;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.4);
 }
 .btn.sm {
   font-size: 10px;
-  padding: 5px 10px;
+  padding: 4px 8px;
   min-height: 32px;
 }
 .btn.danger:active {
@@ -154,33 +162,33 @@ body:fullscreen #title {
   flex: 1;
   text-align: center;
   padding: 5px 8px;
-  font-size: 11px;
+  font-size: 10px;
+  min-height: 34px;
 }
 
 /* Scores */
 #scores {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .score-card {
   flex: 1;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 10px 8px;
+  padding: 8px 6px;
   text-align: center;
-  backdrop-filter: blur(2px);
 }
 .score-card .sc-label {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-dim);
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .score-card .sc-val {
   font-family: 'Cinzel', serif;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--gold);
   font-weight: 600;
 }
@@ -188,40 +196,42 @@ body:fullscreen #title {
 /* Main layout */
 #main {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
 }
 
-/* Board container */
+/* Board container - NO LEAK */
 #board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 3;
-  min-width: 280px;
+  min-width: 260px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 #coord-row-top, #coord-row-bot {
   display: flex;
   width: 100%;
-  max-width: 680px;
-  padding: 0 5%;
+  max-width: 620px;
+  padding: 0 4%;
   justify-content: space-around;
 }
 .coord-label {
   flex: 1;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--gold-dim);
-  letter-spacing: 1px;
   font-family: 'Cinzel', serif;
 }
 #board-outer {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -229,14 +239,14 @@ body:fullscreen #title {
 .coord-col {
   display: flex;
   flex-direction: column;
-  width: 28px;
+  width: 24px;
   align-items: center;
 }
 .coord-col span {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--gold-dim);
   background: rgba(0, 0, 0, 0.25);
@@ -250,18 +260,20 @@ body:fullscreen #title {
   display: flex;
   justify-content: center;
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
-/* Responsive board grid */
+/* Responsive board - fluid and never leaks */
 #board {
   display: grid;
-  grid-template-columns: repeat(8, minmax(46px, 9.5vmin));
-  grid-template-rows: repeat(8, minmax(46px, 9.5vmin));
+  grid-template-columns: repeat(8, minmax(42px, 9vmin));
+  grid-template-rows: repeat(8, minmax(42px, 9vmin));
   border: 3px solid var(--gold-dim);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 162, 39, 0.3);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
   background: #1f2a15;
+  max-width: 100%;
 }
 
 /* Cells */
@@ -279,11 +291,10 @@ body:fullscreen #title {
 }
 .cell.lite { background: var(--cell-lite); }
 .cell.dark { background: var(--cell-dark); }
-.cell.dark:active { background: #3c552b; filter: brightness(1.1); }
+.cell.dark:active { background: #3c552b; }
 .cell.sel-cell {
   background: rgba(201, 162, 39, 0.7) !important;
   outline: 2px solid rgba(201, 162, 39, 0.95);
-  z-index: 2;
 }
 .cell.move-dot::after {
   content: '';
@@ -293,12 +304,10 @@ body:fullscreen #title {
   background: rgba(46, 204, 113, 0.9);
   border: 2px solid #2ecc71;
   pointer-events: none;
-  box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 .cell.cap-dot {
   background: rgba(231, 76, 60, 0.55) !important;
   outline: 2px solid #e74c3c;
-  box-shadow: inset 0 0 6px rgba(231, 76, 60, 0.6);
 }
 .cell.last-from { background: rgba(201, 162, 39, 0.35) !important; }
 .cell.last-to { background: rgba(201, 162, 39, 0.5) !important; }
@@ -310,7 +319,7 @@ body:fullscreen #title {
   border-radius: 50%;
   position: relative;
   cursor: pointer;
-  transition: transform 0.12s, box-shadow 0.15s;
+  transition: transform 0.12s;
   user-select: none;
   display: flex;
   align-items: center;
@@ -320,38 +329,38 @@ body:fullscreen #title {
 .piece.red {
   background: radial-gradient(circle at 38% 32%, #f05545, #c0392b 70%, #7a1f16);
   border: 2px solid rgba(255, 120, 100, 0.6);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 150, 130, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 .piece.blk {
   background: radial-gradient(circle at 38% 32%, #5a5a7a, #2c2c3e 70%, #111118);
   border: 2px solid rgba(130, 130, 180, 0.5);
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(150, 150, 200, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 .piece.king::after {
   content: '♛';
-  font-size: clamp(13px, 4vmin, 26px);
+  font-size: clamp(12px, 3.8vmin, 24px);
   color: #ffd966;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.9);
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.9);
   position: absolute;
   font-weight: bold;
 }
-.piece:active { transform: scale(0.97); }
+.piece:active { transform: scale(0.96); }
 .piece.lifted {
-  transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 0 0 3px var(--gold), 0 10px 20px rgba(0, 0, 0, 0.8) !important;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 0 0 3px var(--gold) !important;
 }
 @keyframes kpop {
   0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-  60% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+  60% { transform: scale(1.2) rotate(8deg); opacity: 1; }
   100% { transform: scale(1) rotate(0); }
 }
-.piece.kpop::after { animation: kpop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }
+.piece.kpop::after { animation: kpop 0.4s cubic-bezier(0.34, 1.3, 0.64, 1) forwards; }
 
 /* Overlay */
 #overlay {
   position: absolute;
   inset: 0;
-  background: rgba(5, 5, 15, 0.95);
+  background: rgba(5, 5, 15, 0.96);
   display: none;
   align-items: center;
   justify-content: center;
@@ -362,142 +371,135 @@ body:fullscreen #title {
 #overlay-box {
   background: var(--bg-card);
   border: 1px solid var(--gold);
-  border-radius: 32px;
-  padding: 28px 32px;
+  border-radius: 28px;
+  padding: 24px 28px;
   text-align: center;
-  max-width: 280px;
+  max-width: 260px;
   width: 80%;
-  box-shadow: 0 0 70px rgba(201, 162, 39, 0.3);
 }
 #overlay-box h2 {
   font-family: 'Cinzel', serif;
-  font-size: 26px;
+  font-size: 24px;
   color: var(--gold);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
-#overlay-box p { font-size: 15px; color: #ccc; margin-bottom: 24px; }
+#overlay-box p { font-size: 14px; color: #ccc; margin-bottom: 20px; }
 @keyframes wglow {
-  0%, 100% { text-shadow: 0 0 8px rgba(201, 162, 39, 0.4); }
-  50% { text-shadow: 0 0 28px rgba(201, 162, 39, 0.9); }
+  0%,100%{ text-shadow:0 0 6px rgba(201,162,39,0.4); }
+  50%{ text-shadow:0 0 24px rgba(201,162,39,0.9); }
 }
-.won { animation: wglow 1.6s ease-in-out infinite; }
+.won { animation: wglow 1.5s ease-in-out infinite; }
 
 /* Sidebar */
 #sidebar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 260px;
+  gap: 14px;
+  width: 250px;
   flex-shrink: 0;
 }
 .panel {
-  background: rgba(19, 19, 37, 0.85);
+  background: rgba(19, 19, 37, 0.88);
   backdrop-filter: blur(6px);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 14px 16px;
+  border-radius: 18px;
+  padding: 12px 14px;
 }
 .panel h3 {
   font-family: 'Cinzel', serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 2px;
   color: var(--gold-dim);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 .player-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 14px;
-  transition: all 0.2s;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 12px;
   border: 1px solid transparent;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .player-row.active {
   background: rgba(201, 162, 39, 0.15);
   border-color: rgba(201, 162, 39, 0.5);
 }
 .pdot {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.pdot.red { background: radial-gradient(circle at 35% 35%, #f05545, #8b1a2a); box-shadow: 0 2px 6px black; }
+.pdot.red { background: radial-gradient(circle at 35% 35%, #f05545, #8b1a2a); }
 .pdot.blk { background: radial-gradient(circle at 35% 35%, #5a5a7a, #1a1a2e); border: 1px solid #5a5a7a; }
-.pname { font-size: 14px; font-weight: 600; flex: 1; }
+.pname { font-size: 13px; font-weight: 600; flex: 1; }
 .pcnt {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--gold);
   background: rgba(201, 162, 39, 0.2);
   border-radius: 30px;
-  padding: 2px 10px;
-  min-width: 36px;
+  padding: 2px 8px;
+  min-width: 34px;
   text-align: center;
 }
 .timer {
   font-family: monospace;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--text-dim);
-  min-width: 52px;
+  min-width: 48px;
   text-align: right;
 }
-.timer.on { color: var(--gold); text-shadow: 0 0 5px rgba(201, 162, 39, 0.5); }
+.timer.on { color: var(--gold); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
 .timer.low { color: #e74c3c !important; animation: blink 0.9s infinite; }
 #history {
-  max-height: 135px;
+  max-height: 120px;
   overflow-y: auto;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-dim);
-  line-height: 1.8;
-  scrollbar-width: thin;
+  line-height: 1.7;
 }
-#history div { padding: 3px 6px; border-radius: 8px; }
-#history div:nth-child(odd) { background: rgba(255, 255, 255, 0.05); }
-#history .cap { color: #e07060; font-weight: 500; }
-#status-msg { font-size: 13px; font-weight: 500; color: #ddd; line-height: 1.4; }
+#history div { padding: 2px 5px; border-radius: 6px; }
+#history div:nth-child(odd) { background: rgba(255, 255, 255, 0.04); }
+#history .cap { color: #e07060; }
+#status-msg { font-size: 12px; font-weight: 500; color: #ddd; line-height: 1.4; word-break: break-word; }
 #status-msg.thinking { color: var(--gold-dim); font-style: italic; }
 #status-msg.chain { color: #f3a683; }
 
-/* Responsive breakpoints */
-@media (max-width: 900px) {
-  #main { gap: 18px; }
-  #sidebar { width: 240px; }
-  .coord-col { width: 24px; }
-  #board { grid-template-columns: repeat(8, minmax(42px, 8vmin)); grid-template-rows: repeat(8, minmax(42px, 8vmin)); }
+/* Responsive */
+@media (max-width: 850px) {
+  #sidebar { width: 220px; }
+  #board { grid-template-columns: repeat(8, minmax(40px, 8vmin)); grid-template-rows: repeat(8, minmax(40px, 8vmin)); }
 }
-@media (max-width: 760px) {
-  body { padding: 10px; }
+@media (max-width: 750px) {
+  body { padding: 8px; }
   #main { flex-direction: column; align-items: center; }
-  #sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 12px; }
-  .panel { flex: 1; min-width: 160px; }
-  #board { grid-template-columns: repeat(8, minmax(40px, 9vmin)); grid-template-rows: repeat(8, minmax(40px, 9vmin)); }
-  .coord-label { font-size: 11px; }
-  .coord-col span { font-size: 11px; }
-  .btn { font-size: 11px; padding: 6px 12px; min-height: 36px; }
-  #title { font-size: 1.3rem; }
+  #sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 10px; }
+  .panel { flex: 1; min-width: 150px; }
+  #board { grid-template-columns: repeat(8, minmax(38px, 9vmin)); grid-template-rows: repeat(8, minmax(38px, 9vmin)); }
+  .coord-label { font-size: 10px; }
+  .coord-col span { font-size: 10px; }
+  .btn { font-size: 10px; padding: 5px 10px; min-height: 36px; }
 }
-@media (max-width: 540px) {
-  body { padding: 6px; }
-  #board { grid-template-columns: repeat(8, minmax(34px, 10vw)); grid-template-rows: repeat(8, minmax(34px, 10vw)); }
+@media (max-width: 550px) {
+  body { padding: 5px; }
+  #board { grid-template-columns: repeat(8, minmax(32px, 10vw)); grid-template-rows: repeat(8, minmax(32px, 10vw)); }
   .coord-col { width: 18px; }
-  .coord-col span { font-size: 9px; }
-  .coord-label { font-size: 9px; }
-  .piece.king::after { font-size: clamp(10px, 3.5vmin, 18px); }
+  .coord-col span { font-size: 8px; }
+  .coord-label { font-size: 8px; }
+  .piece.king::after { font-size: clamp(9px, 3vmin, 16px); }
   .panel { padding: 8px; }
-  .player-row { gap: 6px; }
   .pname { font-size: 11px; }
-  .timer { font-size: 11px; min-width: 40px; }
+  .timer { font-size: 10px; min-width: 38px; }
   .score-card .sc-val { font-size: 16px; }
-  .btn { font-size: 9px; padding: 5px 8px; min-height: 32px; }
-  #title { font-size: 1.1rem; }
+  .btn { font-size: 9px; padding: 4px 8px; min-height: 32px; }
+  #title { font-size: 1.1rem; white-space: normal; }
 }
 </style>
 </head>
@@ -507,11 +509,11 @@ body:fullscreen #title {
   <div id="header">
     <div id="title">CHECKERS <span>ROYAL</span></div>
     <div id="hdr-btns">
-      <button class="btn" id="fullscreenBtn" title="Fullscreen">⛶ Fullscreen</button>
-      <button class="btn" onclick="newGame()">⟳ New</button>
-      <button class="btn" onclick="undoMove()">↩ Undo</button>
-      <button class="btn" onclick="redoMove()">↪ Redo</button>
-      <button class="btn danger" onclick="resign()">⚑ Resign</button>
+      <button class="btn" id="fullscreenBtn">⛶ FULL</button>
+      <button class="btn" onclick="window.newGame()">⟳ NEW</button>
+      <button class="btn" onclick="window.undoMove()">↩ UNDO</button>
+      <button class="btn" onclick="window.redoMove()">↪ REDO</button>
+      <button class="btn danger" onclick="window.resign()">⚑ QUIT</button>
     </div>
   </div>
 
@@ -535,7 +537,7 @@ body:fullscreen #title {
             <div id="overlay-box">
               <h2 id="ov-title">Game Over</h2>
               <p id="ov-msg"></p>
-              <button class="btn active" onclick="newGame()">Play Again</button>
+              <button class="btn active" onclick="window.newGame()">Play Again</button>
             </div>
           </div>
         </div>
@@ -566,16 +568,16 @@ body:fullscreen #title {
       <div class="panel">
         <h3>Game Mode</h3>
         <div class="btn-group">
-          <button class="btn active" id="m-pvai" onclick="setMode('pvai')">vs AI</button>
-          <button class="btn" id="m-pvp" onclick="setMode('pvp')">2 Player</button>
+          <button class="btn active" id="m-pvai" onclick="window.setMode('pvai')">vs AI</button>
+          <button class="btn" id="m-pvp" onclick="window.setMode('pvp')">2 Player</button>
         </div>
       </div>
       <div class="panel" id="diff-panel">
         <h3>AI Difficulty</h3>
         <div class="btn-group">
-          <button class="btn sm" id="d-easy" onclick="setDiff('easy')">Easy</button>
-          <button class="btn sm active" id="d-medium" onclick="setDiff('medium')">Med</button>
-          <button class="btn sm" id="d-hard" onclick="setDiff('hard')">Hard</button>
+          <button class="btn sm" id="d-easy" onclick="window.setDiff('easy')">Easy</button>
+          <button class="btn sm active" id="d-medium" onclick="window.setDiff('medium')">Med</button>
+          <button class="btn sm" id="d-hard" onclick="window.setDiff('hard')">Hard</button>
         </div>
       </div>
       <div class="panel">
@@ -591,58 +593,64 @@ body:fullscreen #title {
 </div>
 
 <script>
-// ==================== FULLSCREEN WITH MOBILE FIX (iOS + Android) ====================
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-
-function launchFullscreen(element) {
-  const requestMethod = element.requestFullscreen ||
-                        element.webkitRequestFullscreen ||
-                        element.webkitEnterFullscreen ||
-                        element.msRequestFullscreen;
-  if (requestMethod) {
-    requestMethod.call(element).catch(err => {
-      console.warn('Fullscreen error:', err);
-    });
+// ==================== UNIVERSAL FULLSCREEN (WORKS ON ALL MOBILE) ====================
+(function() {
+  const fullBtn = document.getElementById('fullscreenBtn');
+  
+  function requestFS(el) {
+    const methods = ['requestFullscreen', 'webkitRequestFullscreen', 'webkitEnterFullscreen', 'msRequestFullscreen'];
+    for (let m of methods) {
+      if (el[m]) {
+        el[m]();
+        return true;
+      }
+    }
+    return false;
   }
-}
-
-function exitFullscreen() {
-  const exitMethod = document.exitFullscreen ||
-                     document.webkitExitFullscreen ||
-                     document.msExitFullscreen;
-  if (exitMethod) {
-    exitMethod.call(document);
+  
+  function exitFS() {
+    const methods = ['exitFullscreen', 'webkitExitFullscreen', 'msExitFullscreen'];
+    for (let m of methods) {
+      if (document[m]) {
+        document[m]();
+        return true;
+      }
+    }
+    return false;
   }
-}
-
-function toggleFullscreen() {
-  const isFull = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  if (!isFull) {
-    // Try to make the whole document fullscreen (most compatible)
-    launchFullscreen(document.documentElement);
-  } else {
-    exitFullscreen();
+  
+  function isFullscreen() {
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
   }
-}
+  
+  function toggleFullscreen() {
+    if (isFullscreen()) {
+      exitFS();
+    } else {
+      // Use body or documentElement - body works better on iOS
+      if (!requestFS(document.body)) {
+        requestFS(document.documentElement);
+      }
+    }
+  }
+  
+  fullBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFullscreen();
+  });
+  fullBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFullscreen();
+  }, { passive: false });
+})();
 
-// Attach with both click and touchstart for maximum mobile responsiveness
-fullscreenBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  toggleFullscreen();
-});
-fullscreenBtn.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  toggleFullscreen();
-}, { passive: false });
+// ==================== GAME ENGINE ====================
+const E=0, R=1, B=2, RK=3, BK=4;
+let board, sel, selMoves, turn, gOver, gMode, diff;
+let chainPiece, lastMove, hist, histIdx, moveLog, tRed, tBlk, tInt, scores, aiLock, kpopSet;
 
-// Game constants
-var E=0, R=1, B=2, RK=3, BK=4;
-
-// State variables
-var board, sel, selMoves, turn, gOver, gMode, diff;
-var chainPiece, lastMove, hist, histIdx, moveLog, tRed, tBlk, tInt, scores, aiLock, kpopSet;
-
-// Helpers (full game logic)
 function isR(p){ return p===R||p===RK; }
 function isB(p){ return p===B||p===BK; }
 function isK(p){ return p===RK||p===BK; }
@@ -654,11 +662,11 @@ function dirs(p){
   return [[-1,-1],[-1,1],[1,-1],[1,1]];
 }
 function capsFor(b, r, c){
-  var p=b[r][c], res=[], dd=dirs(p);
-  for(var i=0;i<dd.length;i++){
-    var dr=dd[i][0], dc=dd[i][1], mr=r+dr, mc=c+dc, lr=r+2*dr, lc=c+2*dc;
+  let p=b[r][c], res=[], dd=dirs(p);
+  for(let i=0;i<dd.length;i++){
+    let dr=dd[i][0], dc=dd[i][1], mr=r+dr, mc=c+dc, lr=r+2*dr, lc=c+2*dc;
     if(lr<0||lr>7||lc<0||lc>7) continue;
-    var mid=b[mr][mc];
+    let mid=b[mr][mc];
     if(b[lr][lc]!==E) continue;
     if(isR(p)&&isB(mid)) res.push({fr:r,fc:c,tr:lr,tc:lc,mr,mc});
     if(isB(p)&&isR(mid)) res.push({fr:r,fc:c,tr:lr,tc:lc,mr,mc});
@@ -666,29 +674,29 @@ function capsFor(b, r, c){
   return res;
 }
 function simpFor(b,r,c){
-  var p=b[r][c], res=[], dd=dirs(p);
-  for(var i=0;i<dd.length;i++){
-    var nr=r+dd[i][0], nc=c+dd[i][1];
+  let p=b[r][c], res=[], dd=dirs(p);
+  for(let i=0;i<dd.length;i++){
+    let nr=r+dd[i][0], nc=c+dd[i][1];
     if(nr>=0&&nr<=7&&nc>=0&&nc<=7&&b[nr][nc]===E) res.push({fr:r,fc:c,tr:nr,tc:nc,mr:-1,mc:-1});
   }
   return res;
 }
 function legalMoves(b,t){
-  var caps=[], simps=[];
-  for(var r=0;r<8;r++) for(var c=0;c<8;c++) if(own(b[r][c],t)){
+  let caps=[], simps=[];
+  for(let r=0;r<8;r++) for(let c=0;c<8;c++) if(own(b[r][c],t)){
     caps.push(...capsFor(b,r,c));
     simps.push(...simpFor(b,r,c));
   }
   return caps.length ? caps : simps;
 }
 function legalForPiece(b,r,c,t){
-  var anyCap=false;
-  for(var rr=0;rr<8;rr++) for(var cc=0;cc<8;cc++) if(own(b[rr][cc],t) && capsFor(b,rr,cc).length) anyCap=true;
+  let anyCap=false;
+  for(let rr=0;rr<8;rr++) for(let cc=0;cc<8;cc++) if(own(b[rr][cc],t) && capsFor(b,rr,cc).length) anyCap=true;
   if(anyCap) return capsFor(b,r,c);
   return simpFor(b,r,c);
 }
 function applyMove(b,mv){
-  var nb=b.map(row=>row.slice()), piece=nb[mv.fr][mv.fc];
+  let nb=b.map(row=>row.slice()), piece=nb[mv.fr][mv.fc];
   nb[mv.fr][mv.fc]=E;
   if(mv.mr>=0) nb[mv.mr][mv.mc]=E;
   nb[mv.tr][mv.tc]=piece;
@@ -696,24 +704,43 @@ function applyMove(b,mv){
   if(piece===B && mv.tr===7) nb[mv.tr][mv.tc]=BK;
   return nb;
 }
-function promoted(before,mv){ var p=before[mv.fr][mv.fc]; return (p===R&&mv.tr===0)||(p===B&&mv.tr===7); }
+function promoted(before,mv){ let p=before[mv.fr][mv.fc]; return (p===R&&mv.tr===0)||(p===B&&mv.tr===7); }
 function count(b){ let r=0,bk=0; for(let i=0;i<8;i++) for(let j=0;j<8;j++){ if(isR(b[i][j])) r++; else if(isB(b[i][j])) bk++; } return {r,bk}; }
 function evaluate(b){ let s=0; for(let r=0;r<8;r++)for(let c=0;c<8;c++){ let p=b[r][c]; if(p===E)continue; let center=Math.min(r,7-r,c,7-c); if(p===R)s-=(1+(7-r)*0.07+center*0.05); else if(p===B)s+=(1+r*0.07+center*0.05); else if(p===RK)s-=1.7; else if(p===BK)s+=1.7; } return s; }
 function minimax(b,depth,a,beta,maxi,t){
   let moves=legalMoves(b,t); if(depth===0||!moves.length) return evaluate(b);
-  if(maxi){ let best=-Infinity; for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,true,t):minimax(nb,depth-1,a,beta,false,opp(t)); best=Math.max(best,val); a=Math.max(a,val); if(beta<=a) break; } return best; }
-  else{ let best=Infinity; for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,false,t):minimax(nb,depth-1,a,beta,true,opp(t)); best=Math.min(best,val); beta=Math.min(beta,val); if(beta<=a) break; } return best; }
+  if(maxi){
+    let best=-Infinity;
+    for(let mv of moves){
+      let nb=applyMove(b,mv);
+      let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,true,t):minimax(nb,depth-1,a,beta,false,opp(t));
+      best=Math.max(best,val); a=Math.max(a,val); if(beta<=a) break;
+    }
+    return best;
+  } else {
+    let best=Infinity;
+    for(let mv of moves){
+      let nb=applyMove(b,mv);
+      let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,a,beta,false,t):minimax(nb,depth-1,a,beta,true,opp(t));
+      best=Math.min(best,val); beta=Math.min(beta,val); if(beta<=a) break;
+    }
+    return best;
+  }
 }
 function bestMove(b,t){
   let depthMap={easy:1,medium:4,hard:7}, depth=depthMap[diff]||4, moves=legalMoves(b,t); if(!moves.length) return null;
   if(diff==='easy'){ let caps=moves.filter(m=>m.mr>=0), pool=caps.length?caps:moves; return pool[Math.floor(Math.random()*pool.length)]; }
   let best=null, bestVal=(t===B)?-Infinity:Infinity;
-  for(let mv of moves){ let nb=applyMove(b,mv); let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,-Infinity,Infinity,(t===B),t):minimax(nb,depth-1,-Infinity,Infinity,(t===R),opp(t)); if(t===B && val>bestVal){bestVal=val;best=mv;} if(t===R && val<bestVal){bestVal=val;best=mv;} }
+  for(let mv of moves){
+    let nb=applyMove(b,mv);
+    let val=(mv.mr>=0&&!promoted(b,mv)&&capsFor(nb,mv.tr,mv.tc).length)?minimax(nb,depth,-Infinity,Infinity,(t===B),t):minimax(nb,depth-1,-Infinity,Infinity,(t===R),opp(t));
+    if(t===B && val>bestVal){bestVal=val;best=mv;}
+    if(t===R && val<bestVal){bestVal=val;best=mv;}
+  }
   return best||moves[0];
 }
 function bestChainCap(b,r,c,t){ let caps=capsFor(b,r,c); if(!caps.length) return null; if(diff==='easy') return caps[0]; let best=null, bestVal=(t===B)?-Infinity:Infinity; for(let mv of caps){ let nb=applyMove(b,mv); let val=minimax(nb,Math.max(1,(diff==='hard'?5:3)-1),-Infinity,Infinity,(t===R),opp(t)); if(t===B && val>bestVal){bestVal=val;best=mv;} if(t===R && val<bestVal){bestVal=val;best=mv;} } return best||caps[0]; }
 
-// RENDER & CONTROLLERS (abridged but fully functional)
 function render(){
   let bd=document.getElementById('board'); bd.innerHTML='';
   for(let r=0;r<8;r++) for(let c=0;c<8;c++){
@@ -751,7 +778,7 @@ function restoreSnap(s){ board=s.board.map(r=>r.slice()); turn=s.turn; chainPiec
 function undoMove(){ if(aiLock) return; let steps=gMode==='pvai'?2:1; let target=histIdx-steps; if(target<0) target=0; if(target===histIdx) return; histIdx=target; restoreSnap(hist[histIdx]); }
 function redoMove(){ if(histIdx>=hist.length-1) return; histIdx++; restoreSnap(hist[histIdx]); }
 const COLS='abcdefgh'; function logMove(mv,t){ let from=COLS[mv.fc]+(8-mv.fr), to=COLS[mv.tc]+(8-mv.tr), txt=(t===R?'Red':'Black')+': '+from+(mv.mr>=0?'×':'-')+to; moveLog.push({txt,cap:mv.mr>=0}); refreshHistoryPanel(); }
-function refreshHistoryPanel(){ let h=document.getElementById('history'); h.innerHTML=''; for(let i=0;i<moveLog.length;i++){ let d=document.createElement('div'); d.textContent=(i+1)+'. '+moveLog[i].txt; if(moveLog[i].cap) d.classList.add('cap'); h.appendChild(d); } h.scrollTop=h.scrollHeight; }
+function refreshHistoryPanel(){ let h=document.getElementById('history'); h.innerHTML=''; for(let i=0;i<moveLog.length;i++){ let d=document.createElement('div'); d.textContent=(i+1)+'. '+moveLog[i].txt; if(moveLog[i].cap) d.classList.add('cap'); h.appendChild(d); } }
 function updateStatus(){ let el=document.getElementById('status-msg'); if(gOver){ el.textContent='Game over.'; el.className=''; return; } if(aiLock){ el.textContent='AI is thinking...'; el.className='thinking'; return; } if(chainPiece){ el.textContent='Continue capturing!'; el.className='chain'; return; } if(gMode==='pvai') el.textContent=turn===R?'Your turn (Red)':'AI is moving...'; else el.textContent=(turn===R?'Red':'Black')+' to move'; el.className=''; }
 function fmtTime(s){ let m=Math.floor(s/60),ss=s%60; return m+':'+(ss<10?'0':'')+ss; }
 function updateTimers(){ document.getElementById('tmr-red').textContent=fmtTime(tRed); document.getElementById('tmr-blk').textContent=fmtTime(tBlk); document.getElementById('tmr-red').classList.toggle('low',tRed<30&&!gOver); document.getElementById('tmr-blk').classList.toggle('low',tBlk<30&&!gOver); }
@@ -761,6 +788,7 @@ function setDiff(d){ diff=d; ['easy','medium','hard'].forEach(x=>document.getEle
 function initBoard(){ board=Array(8).fill().map(()=>Array(8).fill(E)); for(let r=0;r<3;r++) for(let c=0;c<8;c++) if((r+c)%2===1) board[r][c]=B; for(let r=5;r<8;r++) for(let c=0;c<8;c++) if((r+c)%2===1) board[r][c]=R; }
 function buildCoords(){ let L=document.getElementById('cleft'), Rr=document.getElementById('cright'); L.innerHTML=Rr.innerHTML=''; for(let i=8;i>=1;i--){ let sl=document.createElement('span'); sl.textContent=i; L.appendChild(sl); let sr=document.createElement('span'); sr.textContent=i; Rr.appendChild(sr); } }
 function newGame(){ if(tInt) clearInterval(tInt); if(!scores) scores={r:0,b:0,d:0}; if(!diff) diff='medium'; if(!gMode) gMode='pvai'; initBoard(); sel=null; selMoves=null; turn=R; gOver=false; chainPiece=null; lastMove=null; aiLock=false; kpopSet=null; hist=[]; histIdx=-1; moveLog=[]; tRed=300; tBlk=300; document.getElementById('overlay').style.display='none'; document.getElementById('ov-title').className=''; refreshHistoryPanel(); buildCoords(); saveHist(); render(); updateStatus(); updateTimers(); tInt=setInterval(tickTimer,1000); }
+window.newGame = newGame; window.undoMove = undoMove; window.redoMove = redoMove; window.resign = resign; window.setMode = setMode; window.setDiff = setDiff;
 newGame();
 </script>
 </body>
