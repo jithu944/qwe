@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Royal Checkers · Compact Edition</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@400;500;600&display=swap');
 
@@ -33,33 +34,33 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px; /* Slightly tighter window padding */
+  padding: 8px;
   transition: all 0.2s;
 }
 
 #app {
   width: 100%;
-  max-width: 1000px; /* Reduced layout width for a cleaner desktop look */
+  max-width: 1000px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Snug spacing */
+  gap: 10px;
 }
 
-/* Header - More Compact */
+/* Header */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 8px 16px; /* Reduced height */
+  padding: 8px 16px;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 14px;
 }
 #title {
   font-family: 'Cinzel', serif;
-  font-size: 1.2rem; /* Scaled down */
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 1px;
@@ -79,7 +80,7 @@ body {
 /* UI Buttons */
 .btn {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 11px; /* Scaled down slightly */
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   background: rgba(20, 20, 40, 0.85);
@@ -90,7 +91,7 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   touch-action: manipulation;
-  min-height: 34px; /* Shorter touch target optimized for laptops */
+  min-height: 34px;
 }
 .btn:active { transform: scale(0.96); }
 .btn:hover {
@@ -155,7 +156,7 @@ body {
   width: 100%;
 }
 
-/* Board Container - Compact Desktop sizing */
+/* Board Container */
 #board-container {
   flex: 1;
   display: flex;
@@ -167,7 +168,7 @@ body {
   padding: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   width: 100%;
-  max-width: 480px; /* Reduced from 650px to make it perfectly scaled on laptops */
+  max-width: 480px;
   margin: 0 auto;
 }
 #board-outer {
@@ -296,7 +297,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 220px; /* Slimmer side column */
+  width: 220px;
   flex-shrink: 0;
 }
 .panel {
@@ -345,7 +346,7 @@ body {
 }
 .timer.on { color: var(--gold); }
 #history {
-  max-height: 80px; /* Kept concise to save screen real estate */
+  max-height: 80px;
   overflow-y: auto;
   font-size: 11px;
   color: var(--text-dim);
@@ -375,9 +376,7 @@ body {
   width: 85%;
 }
 
-/* ==================== ADAPTIVE RESPONSIVENESS ==================== */
-
-/* Tablet & Smaller Desktop Displays */
+/* Responsive Overrides */
 @media (max-width: 768px) {
   #app { max-width: 520px; }
   #main { flex-direction: column; align-items: center; }
@@ -385,7 +384,6 @@ body {
   .panel { height: 100%; }
 }
 
-/* Smartphone Layouts */
 @media (max-width: 500px) {
   body { padding: 4px; }
   #header { padding: 8px 12px; }
@@ -402,7 +400,7 @@ body {
 }
 
 @media (max-width: 350px) {
-  #hdr-btns { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; }
+  #hdr-btns { display: grid; grid-template-columns: repeat(2, 1fr); width: 100%; }
   #hdr-btns .btn { font-size: 9px; padding: 2px; min-height: 28px; }
   #header { flex-direction: column; }
 }
@@ -497,23 +495,6 @@ body {
 var E=0, R=1, B=2, RK=3, BK=4;
 var board, sel, selMoves, turn, gOver, gMode, diff;
 var chainPiece, lastMove, hist, histIdx, moveLog, tRed, tBlk, tInt, scores, aiLock, kpopSet;
-
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-function launchFullscreen(element) {
-  const requestMethod = element.requestFullscreen || element.webkitRequestFullscreen || element.webkitEnterFullscreen || element.msRequestFullscreen;
-  if (requestMethod) requestMethod.call(element).catch(err => console.warn(err));
-}
-function exitFullscreen() {
-  const exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-  if (exitMethod) exitMethod.call(document);
-}
-function toggleFullscreen() {
-  const isFull = !!(document.fullscreenElement || document.webkitFullscreenElement);
-  if (!isFull) launchFullscreen(document.documentElement);
-  else exitFullscreen();
-}
-fullscreenBtn.addEventListener('click', (e) => { e.preventDefault(); toggleFullscreen(); });
-fullscreenBtn.addEventListener('touchstart', (e) => { e.preventDefault(); toggleFullscreen(); }, { passive: false });
 
 function isR(p){ return p===R||p===RK; }
 function isB(p){ return p===B||p===BK; }
