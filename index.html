@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
-<title>Royal Checkers · Ultimate Responsive</title>
+<title>Royal Checkers · Perfect Fit</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Rajdhani:wght@400;500;600&display=swap');
 
@@ -11,7 +11,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  user-select: none; /* prevents accidental selection/drag on laptop & mobile */
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -36,36 +36,36 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 16px;
   margin: 0;
-  overflow-x: hidden; /* KILL horizontal scroll on ALL devices */
+  overflow-x: hidden;
   width: 100%;
 }
 
+/* fullscreen mode */
 body:fullscreen,
 body:-webkit-full-screen {
-  padding: 16px;
+  padding: 20px;
   background: #0a0a12;
-  overflow-x: hidden;
 }
 
 #app {
   width: 100%;
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-/* Header: flexible, no overflow */
+/* Header: compact and wrap */
 #header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -73,7 +73,7 @@ body:-webkit-full-screen {
 }
 #title {
   font-family: 'Cinzel', serif;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 2px;
@@ -87,10 +87,8 @@ body:-webkit-full-screen {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
-/* buttons: laptop + mobile tap friendly */
 .btn {
   font-family: 'Rajdhani', sans-serif;
   font-size: 12px;
@@ -98,14 +96,12 @@ body:-webkit-full-screen {
   background: rgba(20, 20, 40, 0.85);
   border: 1px solid var(--border);
   color: var(--text-dim);
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(2px);
   touch-action: manipulation;
-  min-height: 42px;
-  min-width: 44px;
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -126,9 +122,8 @@ body:-webkit-full-screen {
 .btn-group .btn {
   flex: 1;
   text-align: center;
-  padding: 8px 6px;
+  padding: 7px 8px;
   font-size: 11px;
-  white-space: nowrap;
 }
 
 /* Score cards */
@@ -142,7 +137,7 @@ body:-webkit-full-screen {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 8px 6px;
+  padding: 6px 8px;
   text-align: center;
 }
 .score-card .sc-label {
@@ -156,7 +151,7 @@ body:-webkit-full-screen {
   color: var(--gold);
 }
 
-/* Main layout: prevents overflow */
+/* Main layout - CRITICAL: dynamic sizing for laptop fit */
 #main {
   display: flex;
   gap: 20px;
@@ -166,20 +161,20 @@ body:-webkit-full-screen {
   width: 100%;
 }
 
-/* BOARD CONTAINER - NO SLIDING, FLEXIBLE */
+/* BOARD CONTAINER - flex shrink, never overflows */
 #board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  flex: 3;
-  min-width: 0; /* critical: allow shrinking */
+  flex: 2.5;
+  min-width: 0;
   width: 100%;
   max-width: 100%;
 }
 
 .coord-label, .coord-col span {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--gold-dim);
   text-align: center;
@@ -192,7 +187,7 @@ body:-webkit-full-screen {
 }
 .coord-label {
   flex: 1;
-  font-size: clamp(9px, 3vw, 14px);
+  font-size: clamp(9px, 2.5vw, 12px);
 }
 
 #board-outer {
@@ -203,7 +198,6 @@ body:-webkit-full-screen {
   width: 100%;
 }
 
-/* coordinates columns */
 .coord-col {
   display: flex;
   flex-direction: column;
@@ -215,7 +209,6 @@ body:-webkit-full-screen {
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 600;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   margin: 2px 0;
@@ -233,7 +226,7 @@ body:-webkit-full-screen {
   width: 100%;
 }
 
-/* THE BOARD: fluid and square, never overflows parent */
+/* THE BOARD: perfect square, scales with container, NO OVERFLOW */
 #board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -254,7 +247,6 @@ body:-webkit-full-screen {
   justify-content: center;
   cursor: pointer;
   position: relative;
-  touch-action: manipulation;
   width: 100%;
   height: 100%;
 }
@@ -301,7 +293,7 @@ body:-webkit-full-screen {
 }
 .piece.king::after {
   content: '♛';
-  font-size: clamp(12px, 4.2vmin, 26px);
+  font-size: clamp(11px, 3.8vmin, 24px);
   color: #ffd966;
   text-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
   position: absolute;
@@ -343,12 +335,12 @@ body:-webkit-full-screen {
 #overlay-box h2 { font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold); margin-bottom: 8px; }
 #overlay-box p { font-size: 14px; margin-bottom: 20px; }
 
-/* Sidebar */
+/* Sidebar - fixed width, but shrinks on medium laptops */
 #sidebar {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: 260px;
+  width: 250px;
   flex-shrink: 0;
 }
 .panel {
@@ -369,7 +361,7 @@ body:-webkit-full-screen {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 8px;
+  padding: 7px 8px;
   border-radius: 40px;
   margin-bottom: 6px;
   border: 1px solid transparent;
@@ -386,23 +378,23 @@ body:-webkit-full-screen {
 }
 .pdot.red { background: radial-gradient(circle at 35% 35%, #f05545, #8b1a2a); }
 .pdot.blk { background: radial-gradient(circle at 35% 35%, #5a5a7a, #1a1a2e); }
-.pname { font-size: 14px; font-weight: 600; flex: 1; white-space: nowrap; }
+.pname { font-size: 13px; font-weight: 600; flex: 1; }
 .pcnt {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--gold);
   background: rgba(201, 162, 39, 0.2);
   border-radius: 30px;
-  padding: 2px 12px;
-  min-width: 42px;
+  padding: 2px 10px;
+  min-width: 40px;
   text-align: center;
 }
 .timer {
   font-family: monospace;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  min-width: 52px;
+  min-width: 50px;
   text-align: right;
 }
 .timer.on { color: var(--gold); text-shadow: 0 0 4px rgba(201,162,39,0.5); }
@@ -421,73 +413,67 @@ body:-webkit-full-screen {
 #status-msg.thinking { color: var(--gold-dim); font-style: italic; }
 #status-msg.chain { color: #f3a683; }
 
-/* ========= RESPONSIVE BREAKPOINTS: FIX SLIDING ON LAPTOP + SMALL ========= */
-/* Standard laptop - board adjusts gracefully */
-@media (max-width: 1000px) {
-  #main { gap: 16px; }
-  #sidebar { width: 240px; }
+/* ========= RESPONSIVE: LAPTOP FIRST - PERFECT FIT NO SCROLL ========= */
+/* Standard laptop screens (1366x768 and similar) */
+@media (max-width: 1200px) {
+  body { padding: 14px; }
+  #sidebar { width: 230px; }
   .coord-col { width: 24px; }
   .coord-col span { font-size: 10px; }
-  .btn { min-height: 40px; padding: 6px 12px; font-size: 11px; }
+  .btn { padding: 6px 12px; font-size: 11px; min-height: 38px; }
+  .score-card .sc-val { font-size: 20px; }
 }
 
-@media (max-width: 860px) {
-  body { padding: 10px; }
+@media (max-width: 1050px) {
+  #main { gap: 16px; }
+  #sidebar { width: 220px; }
+  .panel { padding: 10px 12px; }
+  .pname { font-size: 12px; }
+  .pcnt { font-size: 12px; min-width: 36px; }
+  .timer { font-size: 12px; min-width: 46px; }
+}
+
+@media (max-width: 950px) {
   #main { flex-direction: column; align-items: center; }
   #sidebar { width: 100%; flex-direction: row; flex-wrap: wrap; gap: 12px; }
   .panel { flex: 1; min-width: 180px; }
+  #board-container { max-width: 550px; }
   .coord-col { width: 22px; }
 }
 
 @media (max-width: 700px) {
-  #board { width: 100%; }
+  body { padding: 10px; }
+  #board-container { max-width: 100%; }
   .coord-col { width: 20px; }
   .coord-col span { font-size: 9px; }
-  .score-card .sc-val { font-size: 18px; }
-  .btn { min-height: 38px; }
+  .btn { min-height: 36px; font-size: 10px; }
+  #title { font-size: 1.2rem; white-space: nowrap; }
 }
 
 @media (max-width: 580px) {
-  body { padding: 8px; }
-  #board-wrap { width: 100%; }
-  #board { width: 100%; aspect-ratio: 1/1; }
-  .coord-col { width: 18px; }
-  .coord-col span { font-size: 8px; margin: 1px 0; }
-  .coord-label { font-size: 8px; }
-  .piece.king::after { font-size: clamp(11px, 3.8vw, 20px); }
-  .btn-group .btn { font-size: 9px; padding: 6px 4px; white-space: nowrap; }
-  .player-row { gap: 6px; padding: 5px 6px; }
-  .pname { font-size: 12px; white-space: normal; word-break: keep-all; }
-  .pcnt { font-size: 12px; min-width: 34px; }
-  .timer { font-size: 12px; min-width: 44px; }
-  #title { font-size: 1.2rem; white-space: normal; }
-  #hdr-btns { justify-content: center; }
-}
-
-@media (max-width: 480px) {
   #header { flex-direction: column; align-items: stretch; text-align: center; }
   #title { text-align: center; white-space: normal; }
   #hdr-btns { justify-content: center; }
-  .btn { min-height: 36px; font-size: 10px; padding: 5px 10px; }
+  .coord-col { width: 18px; }
+  .coord-col span { font-size: 8px; }
+  .coord-label { font-size: 8px; }
+  .piece.king::after { font-size: clamp(10px, 3.5vw, 18px); }
+  .btn-group .btn { font-size: 9px; padding: 5px 6px; }
+}
+
+@media (max-width: 450px) {
   .coord-col { width: 16px; }
   .coord-col span { font-size: 7px; }
-  .score-card .sc-val { font-size: 16px; }
-  .panel { padding: 10px; }
   .pdot { width: 20px; height: 20px; }
   .pname { font-size: 11px; }
+  .pcnt { font-size: 11px; min-width: 32px; padding: 1px 6px; }
+  .timer { font-size: 11px; min-width: 42px; }
 }
 
-@media (max-width: 400px) {
-  .btn-group .btn { font-size: 8px; padding: 4px 4px; }
-  .coord-col { width: 14px; }
-  .coord-col span { font-size: 6px; }
-  .piece.king::after { font-size: 9px; }
-}
-
-/* extra large screens: limit board max-width to avoid stretching too much */
-@media (min-width: 1200px) {
-  #board-container { max-width: 700px; }
-  #board { max-width: 680px; }
+/* Laptops with smaller width but ensure no horizontal scroll */
+@media (max-width: 860px) and (min-width: 701px) {
+  #board { max-width: 480px; }
+  #board-container { align-items: center; }
 }
 </style>
 </head>
@@ -497,7 +483,7 @@ body:-webkit-full-screen {
   <div id="header">
     <div id="title">CHECKERS <span>ROYAL</span></div>
     <div id="hdr-btns">
-      <button class="btn" id="fullscreenBtn" aria-label="Fullscreen">⛶ Full</button>
+      <button class="btn" id="fullscreenBtn">⛶ Full</button>
       <button class="btn" id="newGameBtn">⟳ New</button>
       <button class="btn" id="undoBtn">↩ Undo</button>
       <button class="btn" id="redoBtn">↪ Redo</button>
@@ -539,7 +525,7 @@ body:-webkit-full-screen {
 </div>
 
 <script>
-// ========== FULLSCREEN + PREVENT SLIDING ==========
+// ========== FULLSCREEN ==========
 const fullBtn = document.getElementById('fullscreenBtn');
 function toggleFullscreen() {
   if (!document.fullscreenElement && !document.webkitFullscreenElement) {
@@ -788,7 +774,7 @@ function setMode(m){
   document.getElementById('blk-name').textContent=m==='pvai'?'Black (AI)':'Black';
   newGame();
 }
-function setDiff(d){ diff=d; ['easy','medium','hard'].forEach(x=>document.getElementById('d-'+x).classList.remove('active')); document.getElementById('d-'+d).classList.add('active'); if(gMode==='pvai'&&!gOver) newGame(); else if(!gOver&&gMode==='pvai') newGame(); }
+function setDiff(d){ diff=d; ['easy','medium','hard'].forEach(x=>document.getElementById('d-'+x).classList.remove('active')); document.getElementById('d-'+d).classList.add('active'); if(gMode==='pvai'&&!gOver) newGame(); }
 function initBoard(){
   board=Array(8).fill().map(()=>Array(8).fill(E));
   for(let r=0;r<3;r++) for(let c=0;c<8;c++) if((r+c)%2===1) board[r][c]=B;
@@ -810,7 +796,7 @@ function newGame(){
   refreshHistoryPanel(); buildCoords(); saveHist(); render(); updateStatus(); updateTimers();
   tInt=setInterval(tickTimer,1000);
 }
-// attach events
+// Event binding
 document.getElementById('newGameBtn').onclick=()=>newGame();
 document.getElementById('undoBtn').onclick=()=>undoMove();
 document.getElementById('redoBtn').onclick=()=>redoMove();
