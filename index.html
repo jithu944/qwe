@@ -32,43 +32,10 @@ body {
   color: var(--text);
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 12px 10px;
-  transition: all 0.2s;
-}
-
-/* fullscreen mode refinements */
-body:fullscreen {
-  padding: 16px;
-  background: #0a0a12;
-}
-body:fullscreen #app {
-  max-width: 98vw;
-}
-body:fullscreen #board {
-  grid-template-columns: repeat(8, minmax(50px, 9vmin));
-  grid-template-rows: repeat(8, minmax(50px, 9vmin));
-}
-body:fullscreen .cell {
-  width: auto;
-  height: auto;
-  aspect-ratio: 1 / 1;
-}
-body:fullscreen .piece {
-  width: 80%;
-  height: 80%;
-}
-body:fullscreen .piece.king::after {
-  font-size: clamp(14px, 4vmin, 24px);
-}
-body:fullscreen #coord-row-top, body:fullscreen #coord-row-bot {
-  width: 100%;
-  padding: 0 2%;
-}
-body:fullscreen .coord-col span {
-  height: auto;
-  aspect-ratio: 1 / 1.2;
+  padding: 10px;
+  overflow-x: auto;
 }
 
 #app {
@@ -77,7 +44,7 @@ body:fullscreen .coord-col span {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 /* Header */
@@ -86,45 +53,41 @@ body:fullscreen .coord-col span {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 10px 14px;
+  gap: 6px;
+  padding: 8px 12px;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 10px;
 }
 #title {
   font-family: 'Cinzel', serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 2px;
-  text-shadow: 0 0 20px rgba(201,162,39,0.4);
 }
 #title span {
   color: #fff;
   opacity: .6;
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 10px;
   margin-left: 4px;
 }
 #hdr-btns {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   flex-wrap: wrap;
 }
 
-/* Buttons */
 .btn {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text-dim);
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all .18s;
@@ -142,45 +105,39 @@ body:fullscreen .coord-col span {
   font-weight: 700;
 }
 .btn.sm {
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: 9px;
+  padding: 3px 6px;
 }
 .btn.danger:hover {
   border-color: #e74c3c;
   color: #e74c3c;
-  background: rgba(231,76,60,.1);
 }
 .btn-group {
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 .btn-group .btn {
   flex: 1;
   text-align: center;
-  padding: 5px 6px;
-  font-size: 10px;
-}
-.full-icon { 
-  font-size: 16px; 
-  line-height: 1; 
-  margin-right: 4px; 
+  padding: 4px 5px;
+  font-size: 9px;
 }
 
 /* Scores */
 #scores {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 .score-card {
   flex: 1;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 8px;
+  padding: 6px;
   text-align: center;
 }
 .score-card .sc-label {
-  font-size: 9px;
+  font-size: 8px;
   color: var(--text-dim);
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -188,97 +145,93 @@ body:fullscreen .coord-col span {
 }
 .score-card .sc-val {
   font-family: 'Cinzel', serif;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--gold);
   font-weight: 600;
 }
 
-/* Main layout - responsive column */
+/* Main layout */
 #main {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* Board container - fully fluid */
+/* Board container - critical fix for coordinate alignment */
 #board-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
-  flex: 1;
-  min-width: 0;
-  width: auto;
+  gap: 4px;
+  flex-shrink: 0;
 }
+
+/* Top and bottom letter coordinates */
 #coord-row-top, #coord-row-bot {
   display: flex;
-  width: 100%;
-  max-width: 480px;
-  padding: 0 24px;
+  justify-content: center;
   gap: 0;
+  margin: 0 26px;
 }
 .coord-label {
-  flex: 1;
+  width: 56px;
   text-align: center;
   font-size: 10px;
   color: var(--text-dim);
   font-weight: 600;
-  letter-spacing: 0.5px;
 }
+
+/* Outer board wrapper with side numbers */
 #board-outer {
   display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
 }
+
+/* Side number columns - CRITICAL: must match board row heights */
 .coord-col {
   display: flex;
   flex-direction: column;
-  width: 20px;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 24px;
+  flex-shrink: 0;
 }
 .coord-col span {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  width: 100%;
+  height: 56px;
+  font-size: 11px;
   color: var(--text-dim);
   font-weight: 600;
-  flex: 1;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-}
-#board-wrap {
-  position: relative;
-  max-width: 100%;
 }
 
-/* responsive board grid — dynamic sizing without overflow */
+#board-wrap {
+  position: relative;
+}
+
+/* Board grid - fixed cell size */
 #board {
   display: grid;
-  grid-template-columns: repeat(8, minmax(38px, 56px));
-  grid-template-rows: repeat(8, minmax(38px, 56px));
+  grid-template-columns: repeat(8, 56px);
+  grid-template-rows: repeat(8, 56px);
   border: 2px solid var(--gold-dim);
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 0 40px rgba(0,0,0,.8), 0 0 0 1px rgba(201,162,39,.15);
+  box-shadow: 0 0 40px rgba(0,0,0,.8);
   background: var(--cell-dark);
-  width: 100%;
 }
 
-/* Cells - fully flexible */
 .cell {
-  width: 100%;
-  height: 100%;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: background .1s;
-  aspect-ratio: 1 / 1;
 }
 .cell.lite {
   background: var(--cell-lite);
@@ -295,8 +248,8 @@ body:fullscreen .coord-col span {
 }
 .cell.move-dot::after {
   content: '';
-  width: 28%;
-  height: 28%;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: rgba(39,174,96,.65);
   border: 2px solid rgba(39,174,96,.9);
@@ -316,13 +269,12 @@ body:fullscreen .coord-col span {
 
 /* Pieces */
 .piece {
-  width: 80%;
-  height: 80%;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   position: relative;
   cursor: pointer;
   transition: transform .12s, box-shadow .12s;
-  user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,16 +282,16 @@ body:fullscreen .coord-col span {
 .piece.red {
   background: radial-gradient(circle at 38% 32%,#f05545,#c0392b 60%,#7a1f16);
   border: 2px solid rgba(255,120,100,.4);
-  box-shadow: 0 4px 10px rgba(0,0,0,.6), inset 0 2px 4px rgba(255,150,130,.3);
+  box-shadow: 0 4px 10px rgba(0,0,0,.6);
 }
 .piece.blk {
   background: radial-gradient(circle at 38% 32%,#5a5a7a,#2c2c3e 60%,#111118);
   border: 2px solid rgba(130,130,180,.3);
-  box-shadow: 0 4px 10px rgba(0,0,0,.7), inset 0 2px 4px rgba(150,150,200,.15);
+  box-shadow: 0 4px 10px rgba(0,0,0,.7);
 }
 .piece.king::after {
   content: '♛';
-  font-size: clamp(14px, 4.5vw, 20px);
+  font-size: 20px;
   color: #ffd700;
   text-shadow: 0 0 6px rgba(255,215,0,.8);
   position: absolute;
@@ -373,142 +325,128 @@ body:fullscreen .coord-col span {
   justify-content: center;
   border-radius: 4px;
   z-index: 20;
-  backdrop-filter: blur(3px);
 }
 #overlay-box {
   background: var(--bg-card);
   border: 1px solid var(--gold);
   border-radius: 12px;
-  padding: 20px 28px;
+  padding: 16px 22px;
   text-align: center;
-  max-width: 240px;
-  box-shadow: 0 0 60px rgba(201,162,39,.2);
 }
 #overlay-box h2 {
   font-family: 'Cinzel', serif;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--gold);
-  margin-bottom: 6px;
 }
 #overlay-box p {
-  font-size: 13px;
+  font-size: 12px;
   color: #aaa;
-  margin-bottom: 16px;
-  line-height: 1.5;
+  margin: 8px 0 12px;
 }
 @keyframes wglow {
   0%,100% { text-shadow: 0 0 10px rgba(201,162,39,.4); }
-  50% { text-shadow: 0 0 30px rgba(201,162,39,.9), 0 0 60px rgba(201,162,39,.4); }
+  50% { text-shadow: 0 0 30px rgba(201,162,39,.9); }
 }
 .won {
   animation: wglow 1.5s ease-in-out infinite;
 }
 
-/* Sidebar - more compact on mobile */
+/* Sidebar */
 #sidebar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 200px;
+  gap: 8px;
+  width: 190px;
   flex-shrink: 0;
 }
 .panel {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 8px 10px;
 }
 .panel h3 {
   font-family: 'Cinzel', serif;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 600;
   letter-spacing: 2px;
   color: var(--gold-dim);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .player-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 6px;
+  gap: 5px;
+  padding: 4px 5px;
   border-radius: 6px;
-  transition: background .2s,border .2s;
   border: 1px solid transparent;
-  margin-bottom: 4px;
-}
-.player-row:last-child {
-  margin-bottom: 0;
+  margin-bottom: 3px;
 }
 .player-row.active {
   background: rgba(201,162,39,.12);
   border-color: rgba(201,162,39,.4);
 }
 .pdot {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 .pdot.red {
   background: radial-gradient(circle at 35% 35%,#f05545,#8b1a2a);
-  box-shadow: 0 2px 4px rgba(0,0,0,.5);
 }
 .pdot.blk {
   background: radial-gradient(circle at 35% 35%,#5a5a7a,#1a1a2e);
-  box-shadow: 0 2px 4px rgba(0,0,0,.5);
   border: 1px solid #444;
 }
 .pname {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   flex: 1;
 }
 .pcnt {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--gold);
   background: rgba(201,162,39,.12);
   border-radius: 10px;
-  padding: 1px 6px;
-  min-width: 26px;
+  padding: 1px 5px;
+  min-width: 24px;
   text-align: center;
 }
 .timer {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--text-dim);
-  min-width: 38px;
+  min-width: 35px;
   text-align: right;
 }
 .timer.on {
   color: var(--gold);
 }
-@keyframes blink {
-  0%,100% { opacity: 1; }
-  50% { opacity: .4; }
-}
 .timer.low {
   color: #e74c3c!important;
   animation: blink .8s infinite;
 }
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: .4; }
+}
 
 #history {
-  max-height: 110px;
+  max-height: 100px;
   overflow-y: auto;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-dim);
-  line-height: 1.8;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  line-height: 1.7;
 }
 #history div {
-  padding: 2px 4px;
-  border-radius: 3px;
+  padding: 1px 3px;
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 #history div:nth-child(odd) {
@@ -518,126 +456,178 @@ body:fullscreen .coord-col span {
   color: #e07060;
 }
 #status-msg {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: #bbb;
-  line-height: 1.4;
-}
-#status-msg.thinking {
-  color: var(--text-dim);
-  font-style: italic;
-}
-#status-msg.chain {
-  color: #e88;
 }
 
-/* responsive adjustments for small devices */
-@media (max-width: 720px) {
-  body {
-    padding: 8px 6px;
-  }
+/* === RESPONSIVE: scales everything proportionally on mobile === */
+@media (max-width: 700px) {
   #board {
-    grid-template-columns: repeat(8, minmax(34px, 44px));
-    grid-template-rows: repeat(8, minmax(34px, 44px));
+    grid-template-columns: repeat(8, 44px);
+    grid-template-rows: repeat(8, 44px);
   }
-  .coord-col {
-    width: 16px;
+  .cell {
+    width: 44px;
+    height: 44px;
+  }
+  .piece {
+    width: 36px;
+    height: 36px;
+  }
+  .piece.king::after {
+    font-size: 16px;
   }
   .coord-col span {
+    height: 44px;
+    width: 20px;
+    font-size: 10px;
+  }
+  .coord-label {
+    width: 44px;
     font-size: 9px;
   }
   #coord-row-top, #coord-row-bot {
-    padding: 0 18px;
+    margin: 0 20px;
   }
-  .btn {
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-  #title {
-    font-size: 18px;
-  }
-  #sidebar {
-    width: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .panel {
-    flex: 1;
-    min-width: 140px;
-  }
-  .player-row {
-    padding: 4px 5px;
-  }
-  .pname {
-    font-size: 11px;
-  }
-  .timer {
-    font-size: 12px;
+  .coord-col {
+    width: 20px;
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 550px) {
   #board {
-    grid-template-columns: repeat(8, minmax(28px, 38px));
-    grid-template-rows: repeat(8, minmax(28px, 38px));
+    grid-template-columns: repeat(8, 38px);
+    grid-template-rows: repeat(8, 38px);
   }
-  .coord-col {
-    width: 14px;
+  .cell {
+    width: 38px;
+    height: 38px;
+  }
+  .piece {
+    width: 30px;
+    height: 30px;
+  }
+  .piece.king::after {
+    font-size: 14px;
+  }
+  .coord-col span {
+    height: 38px;
+    width: 18px;
+    font-size: 9px;
   }
   .coord-label {
+    width: 38px;
     font-size: 8px;
   }
   #coord-row-top, #coord-row-bot {
-    padding: 0 14px;
+    margin: 0 18px;
+  }
+  .coord-col {
+    width: 18px;
   }
   .btn {
     font-size: 9px;
     padding: 3px 6px;
   }
-  .btn.sm {
-    font-size: 8px;
+  #sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .panel {
+    flex: 1;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 450px) {
+  #board {
+    grid-template-columns: repeat(8, 32px);
+    grid-template-rows: repeat(8, 32px);
+  }
+  .cell {
+    width: 32px;
+    height: 32px;
+  }
+  .piece {
+    width: 26px;
+    height: 26px;
   }
   .piece.king::after {
     font-size: 12px;
   }
-  .score-card .sc-val {
-    font-size: 16px;
-  }
-  .score-card .sc-label {
+  .coord-col span {
+    height: 32px;
+    width: 16px;
     font-size: 8px;
   }
-  #overlay-box {
-    padding: 16px 20px;
-  }
-  #overlay-box h2 {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 420px) {
-  #board {
-    grid-template-columns: repeat(8, minmax(24px, 34px));
-    grid-template-rows: repeat(8, minmax(24px, 34px));
-  }
-  .coord-col {
-    width: 12px;
-  }
-  .coord-col span {
+  .coord-label {
+    width: 32px;
     font-size: 7px;
   }
-  .cell.move-dot::after {
-    width: 20%;
-    height: 20%;
-    border-width: 1px;
+  #coord-row-top, #coord-row-bot {
+    margin: 0 16px;
   }
-  .piece {
-    width: 75%;
-    height: 75%;
+  .coord-col {
+    width: 16px;
+  }
+  .cell.move-dot::after {
+    width: 12px;
+    height: 12px;
   }
 }
 
-/* prevent any text selection or unwanted touch delays */
+@media (max-width: 380px) {
+  #board {
+    grid-template-columns: repeat(8, 28px);
+    grid-template-rows: repeat(8, 28px);
+  }
+  .cell {
+    width: 28px;
+    height: 28px;
+  }
+  .piece {
+    width: 22px;
+    height: 22px;
+  }
+  .piece.king::after {
+    font-size: 10px;
+  }
+  .coord-col span {
+    height: 28px;
+    width: 14px;
+    font-size: 7px;
+  }
+  .coord-label {
+    width: 28px;
+    font-size: 6px;
+  }
+  #coord-row-top, #coord-row-bot {
+    margin: 0 14px;
+  }
+  .coord-col {
+    width: 14px;
+  }
+}
+
+/* Fullscreen adjustments */
+body:fullscreen {
+  padding: 20px;
+}
+body:fullscreen #board {
+  grid-template-columns: repeat(8, minmax(55px, 9vmin));
+  grid-template-rows: repeat(8, minmax(55px, 9vmin));
+}
+body:fullscreen .cell {
+  width: auto;
+  height: auto;
+}
+body:fullscreen .coord-col span {
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
 .cell, .piece, .btn {
   -webkit-tap-highlight-color: transparent;
 }
@@ -649,7 +639,7 @@ body:fullscreen .coord-col span {
   <div id="header">
     <div id="title">CHECKERS <span>ROYAL</span></div>
     <div id="hdr-btns">
-      <button class="btn" id="fullscreenBtn" title="Fullscreen">⛶ Full</button>
+      <button class="btn" id="fullscreenBtn">⛶ Full</button>
       <button class="btn" onclick="newGame()">&#x21BA; New</button>
       <button class="btn" onclick="undoMove()">&#x21A9; Undo</button>
       <button class="btn" onclick="redoMove()">&#x21AA; Redo</button>
@@ -733,33 +723,21 @@ body:fullscreen .coord-col span {
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  FULLSCREEN HANDLER (preserved)
-// ═══════════════════════════════════════════════════════
+// Fullscreen handler
 function toggleFullscreen() {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen().catch(err => {
-      console.warn(`Fullscreen error: ${err.message}`);
-    });
+    document.documentElement.requestFullscreen().catch(e => console.warn(e));
   } else {
     document.exitFullscreen();
   }
 }
 document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
 
-// ═══════════════════════════════════════════════════════
-//  CONSTANTS & GLOBAL STATE (exactly same logic)
-// ═══════════════════════════════════════════════════════
+// Game constants
 var E=0, R=1, B=2, RK=3, BK=4;
 var board, sel, selMoves, turn, gOver, gMode, diff;
-var chainPiece;
-var lastMove;
-var hist, histIdx;
-var moveLog;
-var tRed, tBlk, tInt;
-var scores;
-var aiLock;
-var kpopSet;
+var chainPiece, lastMove, hist, histIdx, moveLog;
+var tRed, tBlk, tInt, scores, aiLock, kpopSet;
 
 function isR(p){ return p===R||p===RK; }
 function isB(p){ return p===B||p===BK; }
@@ -768,8 +746,8 @@ function own(p,t){ return t===R ? isR(p) : isB(p); }
 function opp(t){ return t===R ? B : R; }
 
 function dirs(p){
-  if(p===R)  return [[-1,-1],[-1,1]];
-  if(p===B)  return [[ 1,-1],[ 1,1]];
+  if(p===R) return [[-1,-1],[-1,1]];
+  if(p===B) return [[1,-1],[1,1]];
   return [[-1,-1],[-1,1],[1,-1],[1,1]];
 }
 
@@ -783,7 +761,7 @@ function capsFor(b, r, c){
     if(lr<0||lr>7||lc<0||lc>7) continue;
     var mid=b[mr][mc];
     if(b[lr][lc]!==E) continue;
-    if(isR(p)&&isB(mid)){ res.push({fr:r,fc:c,tr:lr,tc:lc,mr:mr,mc:mc}); continue; }
+    if(isR(p)&&isB(mid)){ res.push({fr:r,fc:c,tr:lr,tc:lc,mr:mr,mc:mc}); }
     if(isB(p)&&isR(mid)){ res.push({fr:r,fc:c,tr:lr,tc:lc,mr:mr,mc:mc}); }
   }
   return res;
@@ -833,8 +811,8 @@ function applyMove(b, mv){
   nb[mv.fr][mv.fc]=E;
   if(mv.mr>=0) nb[mv.mr][mv.mc]=E;
   nb[mv.tr][mv.tc]=piece;
-  if(piece===R  && mv.tr===0) nb[mv.tr][mv.tc]=RK;
-  if(piece===B  && mv.tr===7) nb[mv.tr][mv.tc]=BK;
+  if(piece===R && mv.tr===0) nb[mv.tr][mv.tc]=RK;
+  if(piece===B && mv.tr===7) nb[mv.tr][mv.tc]=BK;
   return nb;
 }
 
@@ -859,8 +837,8 @@ function evaluate(b){
       var p=b[r][c];
       if(p===E) continue;
       var center=Math.min(r,7-r,c,7-c);
-      if(p===R)  s-=(1.0+(7-r)*0.07+center*0.05);
-      else if(p===B)  s+=(1.0+r*0.07+center*0.05);
+      if(p===R) s-=(1.0+(7-r)*0.07+center*0.05);
+      else if(p===B) s+=(1.0+r*0.07+center*0.05);
       else if(p===RK) s-=1.7;
       else if(p===BK) s+=1.7;
     }
@@ -883,7 +861,7 @@ function minimax(b, depth, alpha, beta, maximising, t){
         val=minimax(nb,depth-1,alpha,beta,false,opp(t));
       }
       if(val>best) best=val;
-      if(val>alpha) alpha=val;
+      alpha=Math.max(alpha,val);
       if(beta<=alpha) break;
     }
     return best;
@@ -899,7 +877,7 @@ function minimax(b, depth, alpha, beta, maximising, t){
         val=minimax(nb,depth-1,alpha,beta,true,opp(t));
       }
       if(val<best) best=val;
-      if(val<beta) beta=val;
+      beta=Math.min(beta,val);
       if(beta<=alpha) break;
     }
     return best;
@@ -922,7 +900,7 @@ function bestMove(b, t){
     var nb=applyMove(b,mv);
     var val;
     if(mv.mr>=0 && !promoted(b,mv) && capsFor(nb,mv.tr,mv.tc).length>0){
-      val=minimax(nb,depth,  -Infinity,Infinity,(t===B),t);
+      val=minimax(nb,depth,-Infinity,Infinity,(t===B),t);
     } else {
       val=minimax(nb,depth-1,-Infinity,Infinity,(t===R),opp(t));
     }
@@ -947,7 +925,6 @@ function bestChainCap(b, r, c, t){
   return best||caps[0];
 }
 
-// Rendering (unchanged logic, responsive layout)
 function render(){
   var bd=document.getElementById('board');
   bd.innerHTML='';
@@ -1025,7 +1002,6 @@ function handleClick(r,c){
   }
 }
 
-// doMove, AI, endgame, undo, timers etc remain identical to preserve all behaviors
 function doMove(mv){
   var wasPromo=promoted(board,mv);
   saveHist();
@@ -1056,12 +1032,13 @@ function doMove(mv){
   if(!gOver && gMode==='pvai' && turn===B) scheduleAI(550);
 }
 
-function scheduleAI(delay){
+function scheduleAI(d){
   if(aiLock) return;
   aiLock=true;
   updateStatus();
-  setTimeout(runAI, delay);
+  setTimeout(runAI, d);
 }
+
 function runAI(){
   if(gOver){ aiLock=false; return; }
   var mv;
@@ -1070,6 +1047,7 @@ function runAI(){
   aiLock=false;
   if(mv) doMove(mv);
 }
+
 function checkEnd(){
   var cnt=count(board);
   if(cnt.r===0){ endGame('Black Wins!','Red has no pieces left.','b'); return; }
@@ -1079,6 +1057,7 @@ function checkEnd(){
     endGame(w+' Wins!',w==='Red'?'Black has no moves.':'Red has no moves.',turn===R?'b':'r');
   }
 }
+
 function endGame(title,msg,winner){
   gOver=true;
   if(winner==='r') scores.r++;
@@ -1093,24 +1072,27 @@ function endGame(title,msg,winner){
   document.getElementById('overlay').style.display='flex';
   if(tInt){ clearInterval(tInt); tInt=null; }
 }
+
 function resign(){
   if(gOver) return;
   var w=turn===R?'b':'r';
   endGame((w==='r'?'Red':'Black')+' Wins!','Opponent resigned.',w);
 }
+
 function saveHist(){
   hist=hist.slice(0,histIdx+1);
   hist.push({
-    board: board.map(function(row){return row.slice();}),
-    turn:  turn,
+    board: board.map(function(r){return r.slice();}),
+    turn: turn,
     chain: chainPiece ? chainPiece.slice() : null,
-    last:  lastMove   ? Object.assign({},lastMove) : null,
-    logLen:moveLog.length
+    last: lastMove ? Object.assign({},lastMove) : null,
+    logLen: moveLog.length
   });
   histIdx=hist.length-1;
 }
+
 function restoreSnap(snap){
-  board=snap.board.map(function(row){return row.slice();});
+  board=snap.board.map(function(r){return r.slice();});
   turn=snap.turn;
   chainPiece=snap.chain?snap.chain.slice():null;
   lastMove=snap.last?Object.assign({},snap.last):null;
@@ -1121,6 +1103,7 @@ function restoreSnap(snap){
   document.getElementById('overlay').style.display='none';
   render(); updateStatus();
 }
+
 function undoMove(){
   if(aiLock) return;
   var steps=gMode==='pvai'?2:1;
@@ -1130,11 +1113,13 @@ function undoMove(){
   histIdx=target;
   restoreSnap(hist[histIdx]);
 }
+
 function redoMove(){
   if(histIdx>=hist.length-1) return;
   histIdx++;
   restoreSnap(hist[histIdx]);
 }
+
 var COLS='abcdefgh';
 function logMove(mv,t){
   var from=COLS[mv.fc]+(8-mv.fr);
@@ -1148,6 +1133,7 @@ function logMove(mv,t){
   h.appendChild(d);
   h.scrollTop=h.scrollHeight;
 }
+
 function refreshHistoryPanel(){
   var h=document.getElementById('history');
   h.innerHTML='';
@@ -1158,15 +1144,16 @@ function refreshHistoryPanel(){
     h.appendChild(d);
   }
 }
+
 function updateStatus(){
   var el=document.getElementById('status-msg');
-  if(gOver){ el.textContent='Game over.'; el.className=''; return; }
-  if(aiLock){ el.textContent='AI is thinking…'; el.className='thinking'; return; }
-  if(chainPiece){ el.textContent='Continue capturing!'; el.className='chain'; return; }
+  if(gOver){ el.textContent='Game over.'; return; }
+  if(aiLock){ el.textContent='AI is thinking…'; return; }
+  if(chainPiece){ el.textContent='Continue capturing!'; return; }
   if(gMode==='pvai') el.textContent=turn===R?'Your turn (Red)':'AI is moving…';
   else el.textContent=(turn===R?'Red':'Black')+' to move';
-  el.className='';
 }
+
 function fmtTime(s){ var m=Math.floor(s/60),ss=s%60; return m+':'+(ss<10?'0':'')+ss; }
 function updateTimers(){
   document.getElementById('tmr-red').textContent=fmtTime(tRed);
@@ -1182,6 +1169,7 @@ function tickTimer(){
   if(tBlk===0) endGame('Red Wins!','Black ran out of time.','r');
   updateTimers();
 }
+
 function setMode(m){
   gMode=m;
   document.getElementById('m-pvai').classList.toggle('active',m==='pvai');
@@ -1190,6 +1178,7 @@ function setMode(m){
   document.getElementById('blk-name').textContent=m==='pvai'?'Black (AI)':'Black';
   newGame();
 }
+
 function setDiff(d){
   diff=d;
   ['easy','medium','hard'].forEach(function(x){
@@ -1197,6 +1186,7 @@ function setDiff(d){
   });
   document.getElementById('d-'+d).classList.add('active');
 }
+
 function initBoard(){
   board=[];
   for(var r=0;r<8;r++){
@@ -1206,6 +1196,7 @@ function initBoard(){
   for(var r=0;r<3;r++) for(var c=0;c<8;c++) if((r+c)%2===1) board[r][c]=B;
   for(var r=5;r<8;r++) for(var c=0;c<8;c++) if((r+c)%2===1) board[r][c]=R;
 }
+
 function buildCoords(){
   var L=document.getElementById('cleft'), Rr=document.getElementById('cright');
   L.innerHTML=Rr.innerHTML='';
@@ -1214,6 +1205,7 @@ function buildCoords(){
     var sr=document.createElement('span'); sr.textContent=i; Rr.appendChild(sr);
   }
 }
+
 function newGame(){
   if(tInt){ clearInterval(tInt); tInt=null; }
   if(!scores) scores={r:0,b:0,d:0};
@@ -1235,6 +1227,7 @@ function newGame(){
   render(); updateStatus(); updateTimers();
   tInt=setInterval(tickTimer,1000);
 }
+
 newGame();
 </script>
 </body>
